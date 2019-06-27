@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>第十六天，开始感受JS的乐趣</title>
+</head>
+<body>
+<input id="first-number" type="number" value="0" placeholder="第一个数字">
+<input id="second-number" type="number" value="0" placeholder="第二个数字">
+<button id="add-btn">加</button>
+<button id="minus-btn">减</button>
+<button id="times-btn">乘</button>
+<button id="divide-btn">除</button>
+<p id="result">运算结果</p>
+<script>
+    // 点对应加减乘除按钮的时候，将两个输入框中的数字做对应的算术，并将结果显示在id为result的p标签内。
+    // 暂时不用做任何异常处理
+
+    // 获取id
+    function getIdName(id) {
+        return document.getElementById(id);
+    }
+
+    // 字符串转数字
+    function changeNumber(number) {
+        number = parseFloat(number);
+        return number;
+    }
+
+    let firstNumber = getIdName('first-number'),
+        secondNumber = getIdName('second-number'),
+        addBtn = getIdName('add-btn'),
+        minusBtn = getIdName('minus-btn'),
+        timesBtn = getIdName('times-btn'),
+        divideBtn = getIdName('divide-btn'),
+        result = getIdName('result');
+
+    addBtn.addEventListener('click', function() {
+        result.innerHTML = changeNumber(firstNumber.value) + changeNumber(secondNumber.value);
+    })
+    minusBtn.addEventListener('click', function() {
+        result.innerHTML = changeNumber(firstNumber.value) - changeNumber(secondNumber.value);
+    })
+    timesBtn.addEventListener('click', function() {
+        result.innerHTML = changeNumber(firstNumber.value) * changeNumber(secondNumber.value);
+    })
+    divideBtn.addEventListener('click', function() {
+        result.innerHTML = changeNumber(firstNumber.value) / changeNumber(secondNumber.value);
+    })
+
+</script>
+</body>
+</html>
