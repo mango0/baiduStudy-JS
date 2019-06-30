@@ -1,0 +1,21 @@
+body {
+  font-family: helvetica, sans-serif; }
+
+label {
+  font-weight: bold; }
+
+body > div {
+  padding: 20px 0;
+  marigin: 20px 0; }
+
+input[type="text"] {
+  padding: 5px;
+  width: 150px; }
+
+.story {
+  background: #FFC125;
+  color: #5E2612;
+  padding: 10px;
+  visibility: hidden; }
+
+/*# sourceMappingURL=style.css.map */
