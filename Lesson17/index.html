@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第十七天到第十八天，“如果”可以“重来”</title>
+</head>
+<body>
+<p>请输入 5 到 10 之间的数字：</p>
+<input id="text" type="text">
+<button onclick="checkNumber()">检测输入</button>
+<p id="tips"></p>
+<script>
+function checkNumber() {
+    let text = document.getElementById('text').value;
+    let tips = document.getElementById('tips');
+    tips.innerHTML = '';
+
+    try {
+        if(text === '') throw '是空哒';
+        if(isNaN(text)) throw '不是数字';
+
+        text = Number(text);
+
+        if(text > 10) throw '太大啦';
+        if(text < 5) throw '太小啦';
+    }
+    catch(err) {
+        tips.innerHTML = err;
+    }
+    finally {
+        document.getElementById('text').value = '';
+    }
+}
+</script>
+</body>
+</html>
