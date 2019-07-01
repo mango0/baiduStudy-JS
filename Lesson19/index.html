@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>第十九天：找到那个DOM</title>
+    <style>
+        a {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <div id="news-top" class="section">
+        <h3>Some title</h3>
+        <div class="content">
+            <ul>
+                <li><span>HTML</span><a href="">Some Link1</a></li>
+                <li><span>JS</span><a class="active" href="">Some Link2</a></li>
+                <li><span>CSS</span><a href="">Some Link3</a></li>
+                <li><span>JS</span><a href="">Some Link4</a></li>
+            </ul>
+        </div>
+        <img src="">
+        <p class="">Some Text</p>
+    </div>
+    <div id="news-normal" class="section">
+        <h3>Some title</h3>
+        <div class="content">
+            <ul>
+                <li><span>HTML</span><a href="">Some Link1</a></li>
+                <li><span>HTML</span><a href="">Some Link2</a></li>
+                <li><span>JS</span><a class="active" href="#">Some Link3</a></li>
+                <li><span>CSS</span><a href="">Some Link4</a></li>
+            </ul>
+        </div>
+        <img src="">
+        <p class="">Some Text</p>
+    </div>
+
+
+
+    <a href="javascript:;" class="btn">返回页面中所有li标签</a>
+    <a href="javascript:;" class="btn">返回某个section下所有span中内容为HTML的span标签</a>
+    <a href="javascript:;" class="btn">返回某个section下，所有所包含span内容为spanCont的LI标签</a>
+    <a href="javascript:;" class="btn">返回某个section下，class为active的链接中包含的文字内容</a>
+</div>
+<script>
+    let li = document.getElementsByTagName('li');
+    let section = document.getElementsByClassName('section')
+
+    let btn = document.getElementsByClassName('btn');
+
+    btn[0].addEventListener('click', getAllListItem);
+    btn[1].addEventListener('click', findAllHtmlSpanInOneSection);
+//    btn[2].addEventListener('click', findListItem);
+//    btn[3].addEventListener('click', getActiveLinkContent);
+
+
+
+
+    function getAllListItem() {
+        // 返回页面中所有li标签
+        console.log(li);
+        console.log('--------------');
+    }
+
+    function findAllHtmlSpanInOneSection(sectionId) {
+        // 返回某个section下所有span中内容为HTML的span标签
+        for(let i = 0;i < section.length;i++) {
+//            console.log(section[i]);
+
+            let span = section[i].getElementsByTagName('span');
+//            console.log(span);
+
+            for(let j = 0;j < span.length;j++) {
+//             if(span.textContent.indexOf('HTML' !== -1)) {
+                if(span[i].textContent === 'HTML') {
+                    console.log(span[i]);
+                }
+            }
+
+        }
+        console.log('--------------');
+    }
+
+    function findListItem(sectionId, spanCont) {
+        // 返回某个section下，所有所包含span内容为spanCont的LI标签
+
+
+
+        console.log('--------------');
+    }
+
+    function getActiveLinkContent(sectionId) {
+        // 返回某个section下，class为active的链接中包含的文字内容
+    }
+
+</script>
+</body>
+</html>
