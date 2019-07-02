@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b106e24-95e1-418f-a046-e1085f6d1a5f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lesson19/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lesson19/resize.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lesson19/setInterval.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lesson19/shoppingList.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Lesson17/Lesson16.md" afterPath="$PROJECT_DIR$/Lesson17-18/Lesson16.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Lesson17/index.html" afterPath="$PROJECT_DIR$/Lesson17-18/index.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Lesson17/js/copy.js" afterPath="$PROJECT_DIR$/Lesson17-18/js/copy.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Lesson17/js/index.js" afterPath="$PROJECT_DIR$/Lesson17-18/js/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Lesson17/js/ui.js" afterPath="$PROJECT_DIR$/Lesson17-18/js/ui.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Lesson17/style.css" afterPath="$PROJECT_DIR$/Lesson17-18/style.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Lesson17/style.css.map" afterPath="$PROJECT_DIR$/Lesson17-18/style.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Lesson17/style.scss" afterPath="$PROJECT_DIR$/Lesson17-18/style.scss" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -49,11 +37,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lesson19/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-514">
-              <caret line="56" column="49" lean-forward="true" selection-start-line="56" selection-start-column="49" selection-end-line="56" selection-end-column="49" />
+            <state relative-caret-position="458">
+              <caret line="92" column="5" lean-forward="true" selection-start-line="92" selection-start-column="5" selection-end-line="92" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="6" lean-forward="true" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -301,15 +299,16 @@
       <updated>1561623473310</updated>
       <workItem from="1561623474593" duration="55000" />
       <workItem from="1561794874318" duration="13118000" />
-      <workItem from="1561948922933" duration="6139000" />
+      <workItem from="1561948922933" duration="7469000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19312000" />
+    <option name="totallyTimeSpent" value="20642000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="672" y="17" width="1223" height="1031" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12995781" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -317,7 +316,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905984" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -488,8 +487,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Lesson19/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-514">
-          <caret line="56" column="49" lean-forward="true" selection-start-line="56" selection-start-column="49" selection-end-line="56" selection-end-column="49" />
+        <state relative-caret-position="458">
+          <caret line="92" column="5" lean-forward="true" selection-start-line="92" selection-start-column="5" selection-end-line="92" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="6" lean-forward="true" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
           <folding />
         </state>
       </provider>
