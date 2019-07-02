@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第二十到第二十一天：让你和页面对话</title>
+</head>
+<body>
+<button>Change color</button>
+
+<div class="">
+    <input id="name" type="text">
+    <button id="submit-btn">Submit</button>
+</div>
+
+<script>
+// 改变背景色-------
+let btn = document.getElementsByTagName('button');
+for(let i = 0;i < btn.length;i++) {
+    btn[i].addEventListener('dblclick', function() {
+        console.log(random(255));
+
+        document.body.style.backgroundColor = 'rgb(' + random(255) + ', ' + random(255) + ', ' + random(255) + ')';
+    })
+}
+
+function random(number) {
+    // Math.random();  返回0-1之间的随机数，包含0不包含1；
+    return Math.floor(Math.random() * number);
+}
+
+
+// 作业一
+let inputbox = document.getElementById('name');
+let submitBtn = document.getElementById('submit-btn');
+submitBtn.addEventListener('click', function() {
+    console.log(inputbox.value);
+})
+inputbox.onkeyup = function(e) {
+    if(e.keyCode == 13) {
+        console.log(inputbox.value);
+    }else if(e.keyCode === 27) {
+        inputbox.value = '';
+    }
+}
+</script>
+</body>
+</html>
