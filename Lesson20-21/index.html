@@ -3,6 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>第二十到第二十一天：让你和页面对话</title>
+    <style>
+        body>* {
+            margin-bottom: 30px;
+        }
+
+        select {
+            display: none;
+        }
+
+        .palette {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .palette li {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <button>Change color</button>
@@ -12,13 +33,53 @@
     <button id="submit-btn">Submit</button>
 </div>
 
+
+<div>
+    <label>
+        <input id="school" name="status" type="radio">
+        School
+    </label>
+    <label>
+        <input id="company" name="status" type="radio">
+        Company
+    </label>
+
+    <select id="school-select">
+        <option>北京邮电大学</option>
+        <option>黑龙江大学</option>
+        <option>华中科技大学</option>
+    </select>
+
+    <select id="company-select">
+        <option>百度</option>
+        <option>爱奇艺</option>
+    </select>
+</div>
+
+<div>
+    <ul class="palette">
+        <li style="background-color:crimson"></li>
+        <li style="background-color:bisque"></li>
+        <li style="background-color:blueviolet"></li>
+        <li style="background-color:coral"></li>
+        <li style="background-color:chartreuse"></li>
+        <li style="background-color:darkolivegreen"></li>
+        <li style="background-color:cyan"></li>
+        <li style="background-color:#194738"></li>
+    </ul>
+
+    <p class="color-picker"></p>
+</div>
+
+
+<div>
+    <a class="aaa" href="">aaaaaaaaaaa</a>
+</div>
 <script>
 // 改变背景色-------
 let btn = document.getElementsByTagName('button');
 for(let i = 0;i < btn.length;i++) {
-    btn[i].addEventListener('dblclick', function() {
-        console.log(random(255));
-
+    btn[i].addEventListener('click', function() {
         document.body.style.backgroundColor = 'rgb(' + random(255) + ', ' + random(255) + ', ' + random(255) + ')';
     })
 }
@@ -42,6 +103,102 @@ inputbox.onkeyup = function(e) {
         inputbox.value = '';
     }
 }
+
+
+// 作业二
+/*
+* 当用户选择了 School 的单选框时，显示 School 的下拉选项，隐藏 Company 的下拉选项
+* 当用户选择了 Company 的单选框时，显示 Company 的下拉选项，隐藏 School 的下拉选项
+*/
+let school = document.getElementById('school');
+let company = document.getElementById('company');
+let schoolSelect = document.getElementById('school-select');
+let companySelect = document.getElementById('company-select');
+
+school.addEventListener('click', function() {
+    schoolSelect.style.display = 'block';
+    companySelect.style.display = 'none';
+})
+company.addEventListener('click', function() {
+    companySelect.style.display = 'block';
+    schoolSelect.style.display = 'none';
+})
+
+
+// 作业三
+/*
+ * 点击某一个 Li 标签时，将 Li 的背景色显示在 P 标签内，并将 P 标签中的文字颜色设置成 Li 的背景色
+ */
+var list = document.getElementsByClassName("palette");
+//console.log(list);
+var item = list[0].querySelectorAll('li');
+for (var i = i = 0, len = item.length; i < len; i++) {
+    item[i].onclick = function(e) {
+        var t = e.target;
+        var c = t.style.backgroundColor;
+        var p = document.getElementsByClassName("color-picker")[0]
+        p.innerHTML = c;
+        p.style.color = c;
+
+    }
+}
+
+
+
+
+
+
+var eventUtil = {
+    addHandles: function(element, type, handlers) {
+        if(element.addEventListener) {
+            element.addEventListener(type, handlers, false);
+        }else if(element.attachEvent) {
+            element.attachEvent(on + type, handlers, false);
+        }else {
+            element['on' + type] = handlers;
+        }
+    },
+
+    getEvent: function(event) {
+        return event ? event : window.event;
+    },
+
+    getTarget: function(event) {
+        return event.target ? event.target : event.srcElement;
+    },
+
+    preventDefault: function(event) {
+        if(event.preventDefault) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
+    },
+
+    stopPropagation: function(event) {
+        if(event.propagation) {
+            event.propagation();
+        }else {
+            event.cancelBubble = true;
+        }
+    },
+
+    removeHandlers: function(element, type, handlers) {
+        if(element.removeListener) {
+            element.removeListener(type, handlers, false);
+        }else if(element.detachEvent) {
+            element.detachEvent(on + type, handlers, false);
+        }else {
+            element['on' + type] = null;
+        }
+    }
+}
+
+let aaa = document.getElementsByClassName('aaa');
+function handlers2() {
+    alert('in')
+}
+eventUtil.addHandles(aaa[0], 'click', handlers2)
 </script>
 </body>
 </html>
