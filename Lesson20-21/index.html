@@ -130,9 +130,8 @@ company.addEventListener('click', function() {
  * 点击某一个 Li 标签时，将 Li 的背景色显示在 P 标签内，并将 P 标签中的文字颜色设置成 Li 的背景色
  */
 var list = document.getElementsByClassName("palette");
-//console.log(list);
 var item = list[0].querySelectorAll('li');
-for (var i = i = 0, len = item.length; i < len; i++) {
+/*for (var i = i = 0, len = item.length; i < len; i++) {
     item[i].onclick = function(e) {
         var t = e.target;
         var c = t.style.backgroundColor;
@@ -141,9 +140,18 @@ for (var i = i = 0, len = item.length; i < len; i++) {
         p.style.color = c;
 
     }
-}
-
-
+}*/
+// 事件委托
+list[0].addEventListener('click', function(event) {
+    let e = event || window.event;
+    let target = e.target || e.srcElement;
+    if(target.nodeName.toLowerCase() === 'li') {
+        var c = target.style.backgroundColor;
+        var p = document.getElementsByClassName("color-picker")[0]
+        p.innerHTML = c;
+        p.style.color = c;
+    }
+})
 
 
 
