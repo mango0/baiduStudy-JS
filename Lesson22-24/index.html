@@ -241,6 +241,181 @@
 </div>
 
 
+<div>
+    <div>
+        <h2>练习如何使用数组来实现队列，综合考虑使用数组的 push，pop，shift，unshift操作</h2>
+        <p>实现如阅读材料中，队列的相关入队、出队、获取队头、判空的操作</p>
+        <p>前四个按钮实现：队头对应数组中最后一个元素</p>
+        <p>前四个按钮实现：入队和出队操作后，需要在 id 为 queue-cont 的 p 标签中更新显示队列中的内容，队头在最右侧，中间用 -> 连接（练习使用数组的join方法）</p>
+        <p>-----------</p>
+        <p>后四个按钮实现：队头对应数组中第一个元素</p>
+        <p>后四个按钮实现：入队和出队操作后，需要在 id 为 queue-cont 的 p 标签中更新显示队列中的内容，队头在最左侧，中间用 <- 连接（练习使用数组的join方法）</p>
+    </div>
+
+    <input id="queue-input" type="text">
+    <p id="queue-cont">队列内容：apple-&gt;pear</p>
+    <div class="btn-wrapper02">
+        <button id="in-btn">入队</button>
+        <button id="out-btn">出队</button>
+        <button id="font-btn">打印队头元素内容</button>
+        <button id="empty-btn">判断队列是否为空</button>
+        <span> / </span>
+        <button id="in-btn1">入队</button>
+        <button id="out-btn1">出队</button>
+        <button id="font-btn1">打印队头元素内容</button>
+        <button id="empty-btn1">判断队列是否为空</button>
+    </div>
+    <script>
+        let queue = ["apple", "pear"];
+        let queueInput = document.getElementById('queue-input');
+        let queueCont = document.getElementById('queue-cont');
+        let btnWrapper02 = document.getElementsByClassName('btn-wrapper02');
+        btnWrapper02[0].addEventListener('click', function(e) {
+            let event = e || window.event;
+            let target = event.target || event.srcElement;
+            let newText = queueInput.value;
+            switch(target.id) {
+                case 'in-btn':
+                    if(newText === '') queueCont.innerHTML = '还没有插入数据哦';
+                    else {
+                        queue.unshift(newText);
+                        queueCont.innerHTML = '队列内容： ' + queue.join('-&gt');
+                        queueInput.value = '';
+                        console.log(queue);
+                    }
+                    break;
+                case 'out-btn':
+                    queue.pop();
+                    queueCont.innerHTML = '队列内容：' + queue.join('-&gt');
+                    break;
+                case 'font-btn':
+                    console.log(queue);
+                    queueCont.innerHTML =  '队头内容：' + queue[queue.length - 1];
+                    break;
+                case 'empty-btn':
+                    if(queue.length === 0) {
+                        queueCont.innerHTML = '队列内容： 空';
+                    }else{
+                        queueCont.innerHTML = '队列内容： 非空';
+                    }
+                    break;
+                case 'in-btn1':
+                    if(newText === '') queueCont.innerHTML = '还没有插入数据哦';
+                    else {
+                        queue.push(newText);
+                        queueCont.innerHTML = '队列内容： ' + queue.join('&lt-');
+                        queueInput.value = '';
+                    }
+                    break;
+                case 'out-btn1':
+                    queue.shift();
+                    queueCont.innerHTML = '队列内容：' + queue.join('&lt-');
+                    break;
+                case 'font-btn1':
+                    console.log(queue);
+                    queueCont.innerHTML =  '队头内容：' + queue[0];
+                    break;
+                case 'empty-btn1':
+                    if(queue.length === 0) {
+                        queueCont.innerHTML = '队列内容： 空';
+                    }else{
+                        queueCont.innerHTML = '队列内容： 非空';
+                    }
+                    break;
+            }
+        })
+
+    </script>
+</div>
+
+<div>
+    <div>
+        <h2>如何使用数组来实现栈，综合考虑使用数组的 push，pop，shift，unshift操作</h2>
+        <p>实现如阅读材料中，队列的相关进栈、退栈、获取栈顶、判空的操作</p>
+        <p>前四个按钮实现：栈顶对应数组中最后一个元素</p>
+        <p>前四个按钮实现：进栈和退栈操作后，需要在 id 为 stack-cont 的 p 标签中更新显示栈中的内容，栈顶在最右侧，中间用 -> 连接（练习使用数组的join方法</p>
+        <p>-----------</p>
+        <p>后四个按钮实现：栈顶对应数组中第一个元素</p>
+        <p>后四个按钮实现：进栈和退栈操作后，需要在 id 为 stack-cont 的 p 标签中更新显示栈中的内容，栈顶在最左侧，中间用 -< 连接（练习使用数组的join方法）</p>
+    </div>
+
+    <input id="stack-input" type="text">
+    <p id="stack-cont">栈内容：apple-gt;pear</p>
+    <div class="btn-wrapper22">
+        <button id="push-btn2">进栈</button>
+        <button id="pop-btn2">退栈</button>
+        <button id="font-btn2">打印栈顶元素内容</button>
+        <button id="empty-btn2">判断栈是否为空</button>
+        <span> / </span>
+        <button id="push-btn22">进栈</button>
+        <button id="pop-btn22">退栈</button>
+        <button id="font-btn22">打印栈顶元素内容</button>
+        <button id="empty-btn22">判断栈是否为空</button>
+    </div>
+
+    <script>
+        let stack = ["apple", "pear"];
+        let stackInput = document.getElementById('stack-input');
+        let stackCont = document.getElementById('stack-cont');
+        let btnWrapper22 = document.getElementsByClassName('btn-wrapper22');
+        btnWrapper22[0].addEventListener('click', function(e) {
+            let event = e || window.event;
+            let target = event.target || event.srcElement;
+            let newText = stackInput.value;
+            switch(target.id) {
+                case 'push-btn2':
+                    if(newText === '') stackCont.innerHTML = '还没有插入数据哦';
+                    else {
+                        stack.unshift(newText);
+                        console.log(stack);
+                        stackCont.innerHTML = '栈内容：' + stack.join('-&gt');
+                        stackInput.value = '';
+                    }
+                    break;
+                case 'pop-btn2':
+                    stack.shift();
+                    stackCont.innerHTML = '栈内容：' + stack.join('-&gt');
+                    break;
+                case 'font-btn2':
+                    console.log(stack);
+                    stackCont.innerHTML =  '栈头内容：' + stack[stack.length - 1];
+                    break;
+                case 'empty-btn2':
+                    if(stack.length === 0) {
+                        stackCont.innerHTML = '栈内容： 空';
+                    }else{
+                        stackCont.innerHTML = '栈内容： 非空';
+                    }
+                    break;
+                case 'push-btn22':
+                    if(newText === '') stackCont.innerHTML = '还没有插入数据哦';
+                    else {
+                        stack.push(newText);
+                        console.log(stack);
+                        stackCont.innerHTML = '栈内容：' + stack.join('&lt-');
+                        stackInput.value = '';
+                    }
+                    break;
+                case 'pop-btn22':
+                    stack.pop();
+                    stackCont.innerHTML = '栈内容：' + stack.join('&lt-');
+                    break;
+                case 'font-btn22':
+                    console.log(stack);
+                    stackCont.innerHTML =  '栈头内容：' + stack[0];
+                    break;
+                case 'empty-btn22':
+                    if(stack.length === 0) {
+                        stackCont.innerHTML = '栈内容： 空';
+                    }else{
+                        stackCont.innerHTML = '栈内容： 非空';
+                    }
+                    break;
+            }
+        })
+    </script>
+</div>
+
 <script>
     /*
 实现一个字符串头尾去除空格的函数
@@ -256,22 +431,21 @@
     }
 
     // 测试用例
-    console.log(diyTrim(' a f b    ')); // ->a f b
-    console.log(diyTrim('    ffdaf    ')); // ->ffdaf
-    console.log(diyTrim('1    ')); // ->1
-    console.log(diyTrim('　　f')); // ->f
-    console.log(diyTrim('  　  a f b 　　 ')); // ->a f b
-    console.log(diyTrim(' ')); // ->
-    console.log(diyTrim('　')); // ->
-    console.log(diyTrim('')); // ->
-    console.log('++++++++++++');
+    console.log('+++++ 去除空格 +++++++');
+    console.log(' a f b    : ' + diyTrim(' a f b    ')); // ->a f b
+    console.log('    ffdaf    : ' + diyTrim('    ffdaf    ')); // ->ffdaf
+    console.log('1    : ' + diyTrim('1    ')); // ->1
+    console.log('　　f: ' + diyTrim('　　f')); // ->f
+    console.log('  　  a f b 　　 : ' + diyTrim('  　  a f b 　　 ')); // ->a f b
+    console.log(' : ' + diyTrim(' ')); // ->
+    console.log('　: ' + diyTrim('　')); // ->
+    console.log('\'\': ' + diyTrim('')); // ->
 
     /*
     去掉字符串str中，连续重复的地方
     */
-    function removeRepetition(str) {debugger
-        var result04 = "";
-
+    function removeRepetition(str) {
+        let result04 = '';
         let len = str.length;
         for(let i = 0;i < len;i++) {
             if(str[0] === str[1]) {
@@ -281,16 +455,150 @@
                 str = str.slice(1);
             }
         }
-
         return result04;
     }
 
     // 测试用例
-    console.log(removeRepetition("aaa")); // ->a
-    console.log(removeRepetition("abbba")); // ->aba
-    console.log(removeRepetition("aabbaabb")); // ->abab
-    console.log(removeRepetition("")); // ->
-    console.log(removeRepetition("abc")); // ->abc
+    console.log('+++++ 去掉字符串str中，连续重复的地方 +++++++');
+    console.log('aaa: ' + removeRepetition("aaa")); // ->a
+    console.log('abbba: ' + removeRepetition("abbba")); // ->aba
+    console.log('aabbaabb: ' + removeRepetition("aabbaabb")); // ->abab
+    console.log('\'\': ' + removeRepetition("")); // ->
+    console.log('abc: ' + removeRepetition("abc")); // ->abc
+
+
+    var tree = {
+        "id": 0,
+        "name": "root",
+        "left": {
+            "id": 1,
+            "name": "Simon",
+            "left": {
+                "id": 3,
+                "name": "Carl",
+                "left": {
+                    "id": 7,
+                    "name": "Lee",
+                    "left": {
+                        "id": 11,
+                        "name": "Fate"
+                    }
+                },
+                "right": {
+                    "id": 8,
+                    "name": "Annie",
+                    "left": {
+                        "id": 12,
+                        "name": "Saber"
+                    }
+                }
+            },
+            "right": {
+                "id": 4,
+                "name": "Tony",
+                "left": {
+                    "id": 9,
+                    "name": "Candy"
+                }
+            }
+        },
+        "right": {
+            "id": 2,
+            "name": "right",
+            "left": {
+                "id": 5,
+                "name": "Carl",
+            },
+            "right": {
+                "id": 6,
+                "name": "Carl",
+                "right": {
+                    "id": 10,
+                    "name": "Kai"
+                }
+            }
+        }
+    }
+
+    // 假设id和name均不会重复，根据输入name找到对应的id
+    console.log('假设id和name均不会重复，根据输入name找到对应的id');
+    findIdByName('Carl');
+    function findIdByName(name) {
+        function getName(obj) {
+            if(obj) {
+                if(obj.name === name) {
+                    console.log('id: ' + obj.id);
+                }
+                getName(obj.left);
+                getName(obj.right);
+            }
+        }
+        getName(tree);
+    }
+
+    // 假设id和name均不会重复，根据输入id找到对应的name
+    console.log('假设id和name均不会重复，根据输入id找到对应的name');
+    findNameById(4);
+    function findNameById(id) {
+        function getId(obj) {
+            if(obj) {
+                if(obj.id === id) {
+                    console.log('name: ' + obj.name);
+                }
+                getId(obj.left);
+                getId(obj.right);
+            }
+        }
+        getId(tree);
+    }
+
+    // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
+    console.log('把这个对象中所有的名字以“前序遍历”的方式全部输出到console中');
+    getListWithDLR();
+    function getListWithDLR() {
+        let result = [];
+        function ergodic(obj) {
+            if(obj) {
+                result.push(obj.name);
+                ergodic(obj.left);
+                ergodic(obj.right);
+            }
+        }
+        ergodic(tree);
+        console.log(result);
+    }
+
+    // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
+    console.log('把这个对象中所有的名字以“中序遍历”的方式全部输出到console中');
+    getListWithLDR();
+    function getListWithLDR() {
+        let result = [];
+        function ergodic(obj) {
+            if(obj) {
+                ergodic(obj.left);
+                result.push(obj.name);
+                ergodic(obj.right);
+            }
+        }
+        ergodic(tree);
+        console.log(result);
+    }
+
+    // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
+    console.log('把这个对象中所有的名字以“后序遍历”的方式全部输出到console中');
+    getListWithLRD();
+    function getListWithLRD() {
+        let result = [];
+        function ergodic(obj) {
+            if(obj) {
+                ergodic(obj.left);
+                ergodic(obj.right);
+                result.push(obj.name);
+            }
+        }
+        ergodic(tree);
+        console.log(result);
+    }
 </script>
 </body>
 </html>
