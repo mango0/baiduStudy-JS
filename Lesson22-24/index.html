@@ -243,7 +243,7 @@
 
 <div>
     <div>
-        <h2>练习如何使用数组来实现队列，综合考虑使用数组的 push，pop，shift，unshift操作</h2>
+        <h2>3. 练习如何使用数组来实现队列，综合考虑使用数组的 push，pop，shift，unshift操作</h2>
         <p>实现如阅读材料中，队列的相关入队、出队、获取队头、判空的操作</p>
         <p>前四个按钮实现：队头对应数组中最后一个元素</p>
         <p>前四个按钮实现：入队和出队操作后，需要在 id 为 queue-cont 的 p 标签中更新显示队列中的内容，队头在最右侧，中间用 -> 连接（练习使用数组的join方法）</p>
@@ -330,7 +330,7 @@
 
 <div>
     <div>
-        <h2>如何使用数组来实现栈，综合考虑使用数组的 push，pop，shift，unshift操作</h2>
+        <h2>4. 如何使用数组来实现栈，综合考虑使用数组的 push，pop，shift，unshift操作</h2>
         <p>实现如阅读材料中，队列的相关进栈、退栈、获取栈顶、判空的操作</p>
         <p>前四个按钮实现：栈顶对应数组中最后一个元素</p>
         <p>前四个按钮实现：进栈和退栈操作后，需要在 id 为 stack-cont 的 p 标签中更新显示栈中的内容，栈顶在最右侧，中间用 -> 连接（练习使用数组的join方法</p>
@@ -431,7 +431,7 @@
     }
 
     // 测试用例
-    console.log('+++++ 去除空格 +++++++');
+    console.log('>>>+++++ 去除空格 +++++++');
     console.log(' a f b    : ' + diyTrim(' a f b    ')); // ->a f b
     console.log('    ffdaf    : ' + diyTrim('    ffdaf    ')); // ->ffdaf
     console.log('1    : ' + diyTrim('1    ')); // ->1
@@ -440,6 +440,7 @@
     console.log(' : ' + diyTrim(' ')); // ->
     console.log('　: ' + diyTrim('　')); // ->
     console.log('\'\': ' + diyTrim('')); // ->
+    console.log('-');
 
     /*
     去掉字符串str中，连续重复的地方
@@ -459,13 +460,13 @@
     }
 
     // 测试用例
-    console.log('+++++ 去掉字符串str中，连续重复的地方 +++++++');
+    console.log('>>>+++++ 去掉字符串str中，连续重复的地方 +++++++');
     console.log('aaa: ' + removeRepetition("aaa")); // ->a
     console.log('abbba: ' + removeRepetition("abbba")); // ->aba
     console.log('aabbaabb: ' + removeRepetition("aabbaabb")); // ->abab
     console.log('\'\': ' + removeRepetition("")); // ->
     console.log('abc: ' + removeRepetition("abc")); // ->abc
-
+    console.log('-');
 
     var tree = {
         "id": 0,
@@ -521,7 +522,7 @@
     }
 
     // 假设id和name均不会重复，根据输入name找到对应的id
-    console.log('假设id和name均不会重复，根据输入name找到对应的id');
+    console.log('>>>假设id和name均不会重复，根据输入name找到对应的id');
     findIdByName('Carl');
     function findIdByName(name) {
         function getName(obj) {
@@ -535,9 +536,10 @@
         }
         getName(tree);
     }
+    console.log('-');
 
     // 假设id和name均不会重复，根据输入id找到对应的name
-    console.log('假设id和name均不会重复，根据输入id找到对应的name');
+    console.log('>>>假设id和name均不会重复，根据输入id找到对应的name');
     findNameById(4);
     function findNameById(id) {
         function getId(obj) {
@@ -551,9 +553,10 @@
         }
         getId(tree);
     }
+    console.log('-');
 
     // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
-    console.log('把这个对象中所有的名字以“前序遍历”的方式全部输出到console中');
+    console.log('>>>把这个对象中所有的名字以“前序遍历”的方式全部输出到console中');
     getListWithDLR();
     function getListWithDLR() {
         let result = [];
@@ -567,9 +570,10 @@
         ergodic(tree);
         console.log(result);
     }
+    console.log('-');
 
     // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
-    console.log('把这个对象中所有的名字以“中序遍历”的方式全部输出到console中');
+    console.log('>>>把这个对象中所有的名字以“中序遍历”的方式全部输出到console中');
     getListWithLDR();
     function getListWithLDR() {
         let result = [];
@@ -583,9 +587,10 @@
         ergodic(tree);
         console.log(result);
     }
+    console.log('-');
 
     // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
-    console.log('把这个对象中所有的名字以“后序遍历”的方式全部输出到console中');
+    console.log('>>>把这个对象中所有的名字以“后序遍历”的方式全部输出到console中');
     getListWithLRD();
     function getListWithLRD() {
         let result = [];
@@ -599,6 +604,168 @@
         ergodic(tree);
         console.log(result);
     }
+
+    console.log('-');
+
+
+
+    console.log('>>>将下面数组分别按从大到小以及从小到大进行排序后在console中输出');
+    console.log('[43, 54, 4, -4, 84, 100, 58, 27, 140]');
+    let arr1 = [43, 54, 4, -4, 84, 100, 58, 27, 140];
+    arr1.sort(function(a, b) {
+        return a - b;
+    })
+    console.log(arr1,'从小到大');
+    console.log(arr1.reverse(),'从大到小');
+    console.log('-');
+
+
+    console.log('>>>将下面数组分别按字母顺序a-z及z-a进行排序，在console中输出');
+    console.log('[\'apple\', \'dog\', \'cat\', \'car\', \'zoo\', \'orange\', \'airplane\'];');
+    let arr02 = ['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane'];
+    let map02 = arr02.map(function(el, i) {
+        return {index: i, value: el.toLowerCase()};
+    })
+    map02.sort(function(a, b) {
+        if(a.value > b.value) {
+            return 1;
+        }else if(a.value < b.value) {
+            return -1;
+        }
+    })
+    let result02 = map02.map(function(el) {
+        return arr02[el.index];
+    });
+    console.log(result02,'从a到z');
+    console.log(result02.reverse(),'从z到a');
+    console.log('-');
+
+
+    console.log('>>>将下面二维数组，按照每个元素中第二个数从大到小的顺序进行排序输出，输出结果应该为:[[22, 63], [16, 60], [7, 44], [26, 35], [10, 14]]');
+    console.log('[[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]]');
+    let arr03 = [[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]];
+    let map03 = arr03.map(function(el, i) {
+        return {index: i, value: el[1]}
+    })
+    map03.sort(function(a, b) {
+        return b.value - a.value;
+    })
+    let result03 = map03.map(function(el) {
+        return [arr03[el.index][0], arr03[el.index][1]];
+    })
+    console.log(result03,'第二个数从大到小');
+    console.log('-');
+
+
+
+    console.log('>>>将下面数组分别按元素对象的value值从小到大进行排序后输出');
+    let arr04 = [
+        {
+            id: 1,
+            name: 'candy',
+            value: 40
+        }, {
+            id: 2,
+            name: 'Simon',
+            value: 50
+        }, {
+            id: 3,
+            name: 'Tony',
+            value: 45
+        }, {
+            id: 4,
+            name: 'Annie',
+            value: 60
+        }
+    ];
+    let map04 = arr04.map(function(el, i) {
+        return {index: i, value: el.name.toLowerCase()};
+    })
+    map04.sort(function(a, b) {
+        if(a.value > b.value) {
+            return 1;
+        }else if(a.value < b.value) {
+            return -1;
+        }
+    })
+    let result04 = map04.map(function(el) {
+        return arr04[el.index];
+    })
+    console.log(result04,'value值从小到大');
+    console.log('-');
+
+
+
+    console.log('对象转为数组');
+    var scoreObject = {
+        "Tony": {
+            "Math": 95,
+            "English": 79,
+            "Music": 68
+        },
+        "Simon": {
+            "Math": 100,
+            "English": 95,
+            "Music": 98
+        },
+        "Annie": {
+            "Math": 54,
+            "English": 65,
+            "Music": 88
+        }
+    }
+    let arr05 = [];
+    for(let i in scoreObject) {
+        let firstArr05 = []
+        firstArr05.push(i);
+        for(let j in scoreObject[i]) {
+            firstArr05.push(scoreObject[i][j]);
+        }
+        arr05.push(firstArr05);
+    }
+    console.log(arr05);
+    console.log('-');
+
+
+    console.log('数组转为对象');
+    var menuArr = [
+        [1, "Area1", -1],
+        [2, "Area2", -1],
+        [3, "Area1-1", 1],
+        [4, "Area1-2", 1],
+        [5, "Area2-1", 2],
+        [6, "Area2-2", 2],
+        [7, "Area1-2-3", 4],
+        [8, "Area2-2-1", 6],
+    ];
+    let pObj = {};
+    let parentObj = {};
+    let childObj = {};
+    let newArr = [];
+    for(let i in menuArr) {
+        if(menuArr[i][2] === -1) {
+            newArr.push(menuArr[i][0]);
+        }
+        childObj[menuArr[i][0]] = {
+            'name': menuArr[i][1],
+            'subMenu': {
+            }
+        };
+
+        if(menuArr[i][2] !== -1) {
+            childObj[menuArr[i][2]].subMenu[menuArr[i][0]] = childObj[menuArr[i][0]]
+        }//不是第一层的，全部挂载到各自父元素上
+    }
+    for(let i in childObj) {
+        if(JSON.stringify(childObj[i].subMenu) === '{}') {
+            delete childObj[i].subMenu;
+        }
+    }//删除没有子元素的对象的submenu属性
+    for(let i in newArr) {
+        parentObj[newArr[i]] = childObj[newArr[i]]
+    }
+
+    console.log(parentObj,'parentObj');
 </script>
 </body>
 </html>
