@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>倒数开始 滴答滴 滴答滴</title>
+    <title>第二十五天到第二十七天 倒数开始 滴答滴 滴答滴</title>
     <style>
         body>div {
             margin-bottom: 20px;
@@ -25,7 +25,8 @@
         <p>封装一个函数，把最后的日期时间，按照要求的格式进行包装</p>
         <p>可能不止上面这些，尽可能地进行功能的解耦和拆解</p>
     </div>
-    <p id="dateBlock"></p>
+    <p id="dateBlock" style="color: cornflowerblue;"></p>
+    <p id="dateBlock2" style="color: peru;"></p>
 </div>
 
 
@@ -62,18 +63,9 @@
     GoSteps(null);  // 0次
 
 
-    //2008年10月10日星期一 12:12:12
+
     console.log('-----------');
-    console.log('时钟');
-    let dateBlock = document.getElementById('dateBlock');
-    let d = new Date();
-    let seconds = d.getSeconds();
-    let minutes = d.getMinutes();
-    let hours = d.getHours();
-    let date = d.getDate();
-    let day = d.getDay();
-    let month = d.getMonth();
-    let year = d.getYear();
+    // console.log('时钟');
 
     // 补零
     function addZero(x) {
@@ -91,17 +83,102 @@
     }
 
     // 获取月份
-    function getMonth(x) {
+    function getMonths(x) {
         return x + 1;
     }
 
-    // 组合日期
+    // 组合日期（2008年10月10日星期一 12:12:12）
     function getNewDate(a, b, c, d, e, f, g) {
         let newDate = a + '年' + b + '月' + c + '日' + d + ' ' + e + ':' + f + ':' + g;
         return newDate;
     }
 
-    dateBlock.innerHTML = getNewDate(year, addZero(getMonth(month)), addZero(date), getWeek(day), addZero(hours), addZero(minutes), addZero(seconds));
+    // 函数要自身调用，才能实时更新时间，并且newDate需要写在函数内部，每次都要获取新的时间。
+    function interval() {
+        let dateBlock = document.getElementById('dateBlock');
+        let d = new Date();
+        let seconds = d.getSeconds();
+        let minutes = d.getMinutes();
+        let hours = d.getHours();
+        let date = d.getDate();
+        let day = d.getDay();
+        let month = d.getMonth();  // 先获取时间，然后+1，再补零
+        let year = d.getFullYear();
+
+        dateBlock.innerHTML = '第一种格式日期：️ ' + getNewDate(year, addZero(getMonths(month)), addZero(date), getWeek(day), addZero(hours), addZero(minutes), addZero(seconds));
+    }
+    setInterval('interval()', 1000);
+
+
+    // 获取上午还是下午
+    function getAmOrPm(x) {
+        if(x >= 12) {
+            x -= 12;
+            amOrPm = 'PM';
+        }else {
+            amOrPm = 'AM';
+        }
+        let arr = [x, amOrPm];
+
+        return arr;
+    }
+
+    // 获取星期几（英文）
+    function getWeekEnglish(x) {
+        let arr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        switch(x) {
+            case 0:
+                x = arr[0];
+                break;
+            case 1:
+                x = arr[1];
+                break;
+            case 2:
+                x = arr[2];
+                break;
+            case 3:
+                x = arr[3];
+                break;
+            case 4:
+                x = arr[4];
+                break;
+            case 5:
+                x = arr[5];
+                break;
+            case 6:
+                x = arr[6];
+                break;
+
+        }
+        return x;
+    }
+
+
+    function getNewDate2(a, b, c, d, e, f, g) {
+        let newDate = a + '-' + b + '-' + c + ' ' + d + ' ' + e + ':' + f + ':' + g + ' ' + getAmOrPm(hours)[1];
+        return newDate;
+    }
+
+    function timeOut() {
+        let dateBlock2 = document.getElementById('dateBlock2');
+        let d = new Date();
+        let seconds = d.getSeconds();
+        let minutes = d.getMinutes();
+        let hours = d.getHours();
+        let date = d.getDate();
+        let day = d.getDay();
+        let month = d.getMonth();
+        let year = d.getFullYear();
+        let amOrPm; // 上午还是下午
+
+        // 组合日期2（2008-10-10 Monday 07:10:30 PM）
+        dateBlock2.innerHTML = '第二种格式日期：️ ' + year + '-' + addZero(getMonths(month))
+            + '-' + addZero(date) + ' ' + getWeekEnglish(day) + ' ' + addZero(getAmOrPm(hours)[0])
+            + ':' + addZero(minutes) + ':' + addZero(seconds) + ' ' + getAmOrPm(hours)[1];
+
+        setTimeout(timeOut, 1000);
+    }
+    timeOut();
 
 </script>
 </body>
