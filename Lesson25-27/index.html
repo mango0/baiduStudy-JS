@@ -7,11 +7,15 @@
         body>div {
             margin-bottom: 20px;
         }
+        .describe {
+            font-size: 12px;
+            color: slategray;
+        }
     </style>
 </head>
 <body>
 <div>
-    <div>
+    <div class="describe">
         <h2>时钟</h2>
         <p>在页面中显示当前日期及时间，按秒更新</p>
         <p>格式为 YYYY 年 MM 月 DD 日 星期 D HH:mm:ss</p>
@@ -29,6 +33,46 @@
     <p id="dateBlock2" style="color: peru;"></p>
 </div>
 
+
+<div>
+    <div class="describe">
+        <h2>选择日期跟现在对比</h2>
+        <p>当变更任何一个select选择时，更新 result-wrapper 的内容</p>
+        <p>当所选时间早于现在时间时，文案为 现在距离 "所选时间" 已经过去 xxxx</p>
+        <p>当所选时间晚于现在时间时，文案为 现在距离 "所选时间" 还有 xxxx</p>
+        <p>注意当前时间经过所选时间时候的文案变化</p>
+        <p>注意选择不同月份的时候，日期的可选范围不一样，比如1月可以选31天，11月只有30天，注意闰年</p>
+    </div>
+
+    请选择时间：
+    <select id="year-select">
+        <option value="">请选择</option>
+    </select> 年
+
+    <select id="month-select">
+        <option value="">请选择</option>
+    </select> 月
+
+    <select id="day-select">
+        <option value="">请选择</option>
+    </select> 日
+
+    <select id="hour-select">
+        <option value="">请选择</option>
+    </select> 时
+
+    <select id="minute-select">
+        <option value="">请选择</option>
+    </select> 分
+
+    <select id="second-select">
+        <option value="">请选择</option>
+    </select> 秒
+
+    <p>现在时间： <span id="nowDate"></span></p>
+    <p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+</div>
+<script src="selectTime.js"></script>
 
 <script>
     function Go() {
