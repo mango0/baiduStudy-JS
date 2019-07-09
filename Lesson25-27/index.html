@@ -44,31 +44,22 @@
         <p>注意选择不同月份的时候，日期的可选范围不一样，比如1月可以选31天，11月只有30天，注意闰年</p>
     </div>
 
-    请选择时间：
-    <select id="year-select">
-        <option value="">请选择</option>
-    </select> 年
+    <div id="selectWrapper">
+        请选择时间：
+        <select id="year-select"></select> 年
 
-    <select id="month-select">
-        <option value="">请选择</option>
-    </select> 月
+        <select id="month-select"></select> 月
 
-    <select id="day-select">
-        <option value="">请选择</option>
-    </select> 日
+        <select id="day-select"></select> 日
 
-    <select id="hour-select">
-        <option value="">请选择</option>
-    </select> 时
+        <select id="hour-select"></select> 时
 
-    <select id="minute-select">
-        <option value="">请选择</option>
-    </select> 分
+        <select id="minute-select"></select> 分
 
-    <select id="second-select">
-        <option value="">请选择</option>
-    </select> 秒
-    <button id="judgeTimeBtn">开始比对</button>
+        <select id="second-select"></select> 秒
+    </div>
+
+    <!--<button id="judgeTimeBtn">开始比对</button>-->
 
     <p>现在时间： <span id="nowDate"></span></p>
     <p id="result-wrapper"></p>
