@@ -5,10 +5,11 @@ let hourSelect = document.getElementById('hour-select');
 let minuteSelect = document.getElementById('minute-select');
 let secondSelect = document.getElementById('second-select');
 let nowDate = document.getElementById('nowDate');
+let judgeTimeBtn = document.getElementById('judgeTimeBtn');
 let resultWrapper = document.getElementById('result-wrapper');
 
 // 定义选择的年月日时分秒
-let selectYear, selectMonth, selectDate, selectHour, selectMinute, selectSecond;
+let selectYear, selectMonth, selectDate, selectHour, selectMinute, selectSecond, selectDay;
 
 // 获取时间
 let date = new Date();
@@ -74,6 +75,32 @@ function getAllMS() {
     }
 }
 // 修改选择时间是星期几的格式；
+function changeDay(selectDayIs) {
+    switch(selectDayIs) {
+        case 0:
+            selectDay = '星期日';
+            break;
+        case 1:
+            selectDay = '星期一';
+            break;
+        case 2:
+            selectDay = '星期二';
+            break;
+        case 3:
+            selectDay = '星期三';
+            break;
+        case 4:
+            selectDay = '星期四';
+            break;
+        case 5:
+            selectDay = '星期五';
+            break;
+        case 6:
+            selectDay = '星期六';
+            break;
+    }
+    return selectDay;
+}
 
 getYearSelect(minYear, maxYear);
 getAllMonth();
@@ -114,10 +141,44 @@ secondSelect.addEventListener('change', function() {
 })
 
 
-let selectDates = new Date(selectYear, selectMonth, selectDate, selectHour, selectMinute, selectSecond);
-let selectDayIs = selectDates.getDay(); // 获取选择时间是星期几
-// let selectDate = 0;
-let selectDateTime = selectDates.getTime(); // 把选择时间转换成毫秒数
-console.log(selectDayIs,'selectDayIs');
+judgeTimeBtn.addEventListener('click', function() {
+    if(selectYear && selectMonth && selectDate && selectHour && selectMinute && selectSecond) {
 
-// let dValue = dateTime -
+        let selectDates = new Date(selectYear, selectMonth - 1, selectDate, selectHour, selectMinute, selectSecond);
+        let selectDayIs = changeDay(selectDates.getDay()); // 获取选择时间是星期几,并转换格式；
+
+        let selectDateTime = selectDates.getTime(); // 把选择时间转换成毫秒数
+
+        let arr = compareTime(selectDateTime, nowDateTime);
+
+
+        resultWrapper.innerHTML = '现在距离' + selectYear + '年' + selectMonth + '月' + selectDate + '日 '
+            + selectDayIs + ' ' + selectHour + ':' + selectMinute + ':' + selectSecond + ' ' + arr[4]
+            + arr[0] + '天' + arr[1] + '小时' + arr[2] + '分' + arr[3] + '秒';
+    }
+})
+
+
+// 比对两个日期，获取相差的天时分秒
+function compareTime(startTime, endTime) {
+    let dValue = endTime - startTime;
+
+    let time = Math.abs(dValue / 1000);
+
+    let resultDate = Math.floor(time / 24 / 60 / 60);
+    let resultHour = Math.floor(time / 60 / 60)% 24;
+    let resultMinute = Math.floor(time / 60) % 60;
+    let resultSecond = Math.floor(time) % 60;
+
+    let arr = [resultDate, resultHour, resultMinute, resultSecond];
+
+    if(dValue >= 0) {
+        arr[4] = '已经过去';
+    }else {
+        arr[4] = '还有';
+    }
+
+    return arr;
+}
+
+
