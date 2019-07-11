@@ -1,0 +1,26 @@
+.wrapper {
+  position: relative;
+  width: 400px; }
+  .wrapper #email-input {
+    padding: 5px 10px; }
+  .wrapper .email-sug {
+    position: absolute;
+    top: 29px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    background: #fff;
+    border: 1px solid #eeeeee;
+    margin: 0;
+    padding: 0; }
+    .wrapper .email-sug li {
+      list-style: none;
+      padding: 4px 10px; }
+      .wrapper .email-sug li:hover {
+        background-color: cornflowerblue;
+        color: #fff; }
+      .wrapper .email-sug li.active {
+        background-color: lightpink;
+        color: #fff; }
+
+/*# sourceMappingURL=index.css.map */
