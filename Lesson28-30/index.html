@@ -2,126 +2,193 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>第二十八天到第三十天 给爱的人发个邮件吧</title>
     <link rel="stylesheet" href="index.css">
-    <style>
-        .describe {
-            font-size: 12px;
-            color: slategray;
-        }
-    </style>
 </head>
 <body>
-<div class="describe">
-    <p>根据下面需求实现如示意图所示的邮箱输入提示功能，注意，根据要求只需实现下面功能</p>
-
-    <p>当用户没有任何输入时，提示框消失</p>
-    <p>当用户输入字符后，显示提示框，并且把用户输入的内容自动拼上邮箱后缀进行显示</p>
-    <p>暂时不用考虑示意图中的红色和蓝色背景色的逻辑</p>
-    <p>注意用户输入中前后空格需要去除</p>
-</div>
 <div class="wrapper">
-    <input id="email-input" type="text">
+    <input id="email-input" type="text" autocomplete="off">
     <ul id="email-sug-wrapper" class="email-sug"></ul>
 </div>
-</body>
+
 <script>
 // 邮箱后缀List参考
-var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+const postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+let valueArr = [];
+let newPostfixList = [];
+let index = 0;
 
 let emailInput = document.getElementById('email-input');
 let emailSugWrapper = document.getElementById('email-sug-wrapper');
 
-if(!emailInput.value) emailSugWrapper.style.display = 'none';
-
-for(let i = 0;i < postfixList.length;i++) {
-    let li = document.createElement('li');
-
-    // 监听input输入框，如果有内容，显示提示框；反之隐藏提示框
-    emailInput.addEventListener('input', function(e) {
-        let event = e || window.event;
-        let target = event.target || event.srcElement;
-
-        // 如果输入框没有值
-        if(!emailInput.value) {
-            emailSugWrapper.style.display = 'none'; // 隐藏提示框
-            emailSugWrapper.innerHTML = ''; // 提示框的html至为空
-        }else {
-            let liIndex = 0;
-
-            // 如果键盘按键不是回车，上，下；
-            if(event.code !== 'ArrowUp' || event.code !== 'ArrowDown' || event.code !== 'Enter') {
-                let newEmailInputValue = sliceText(emailInput.value, '@'); // 存储 @ 之前的字符；
-
-                let index = (emailInput.value).indexOf('@'); // 获取 @ 出现的下标；
-                li.innerHTML = ''; // 提示框的 li 先至为空
-                // 如果 @ 出现
-                if(index !== -1) {
-                    let afterValue = emailInput.value.slice(index + 1); // 存储 @ 之后的字符；
-                    // 如果 @ 之后的字符有值
-                    if(afterValue) {
-                        /* for(let j = 0;j < afterValue.length;j++) { debugger
-                         if(afterValue[j] === postfixList[i][j]) {
-                         li.innerHTML = trim(newEmailInputValue) + '@' + postfixList[i];
-                         }
-                         }*/
-
-                        // 如果邮箱后缀数组中有 @ 之后的字符
-                        if(postfixList[i].indexOf(afterValue) !== -1) {
-                            console.log(postfixList[i],'postfixList[i]');
-                            li.innerHTML = trim(newEmailInputValue) + '@' + postfixList[i]; // 提示框显示输入的文字及邮箱后缀
-                        }
-                    }else {
-                        li.innerHTML = trim(newEmailInputValue) + '@' + postfixList[i]; // 提示框显示输入的文字及邮箱后缀
-                    }
-                }
-                else {
-                    li.innerHTML = trim(newEmailInputValue) + '@' + postfixList[i]; // 提示框显示输入的文字及邮箱后缀
-                }
-
-
-                emailSugWrapper.appendChild(li);
-                emailSugWrapper.style.display = 'block';
-                li.className = 'active';
-//                console.log(emailSugWrapper.getElementsByTagName('li')[0],'li');
-            }else {
-//                li.
-            }
-
-
-        }
-    })
-}
-
-// 去掉两端空格
-function trim(emailInputValue) {
-    return emailInputValue.trim();
-}
-
-// 截取指定字符串出现前的位置
-function sliceText(emailInputValue, character) {
-    // 如果 emailInputValue 中存在 ；
-    if(emailInputValue.indexOf(character) !== -1) {
-        emailInputValue = emailInputValue.slice(0, emailInputValue.indexOf(character)); // 截取 emailInputValue 的起始位置到 character 的位置（不包括character）
+judgeHasValue(emailInput.value);
+// 当用户没有任何输入时，提示框消失
+function judgeHasValue(value) {
+    if(!value) {
+        index = 0;
+        emailSugWrapper.style.display = 'none';
+        emailSugWrapper.innerhtml = '';
+        return false;
+    }else {
+        emailSugWrapper.style.display = 'block';
+        return true;
     }
-    return emailInputValue; // 返回截取后的 emailInputValue
 }
 
-// 监听提示框li的点击事件，事件委托
+// 去除输入中前后空格
+function trim(value) {
+    if(value) {
+        value = value.trim();
+
+        value = value.replace(/&/g,"&amp;");
+        value = value.replace(/</g,"&lt;");
+        value = value.replace(/>/g,"&gt;");
+        value = value.replace(/ /g,"&nbsp;");
+        value = value.replace(/"/g,'&quot;');
+    }
+    return value;
+}
+
+// 判断输入框的值是否含有 特殊字符，且特殊字符后面还有值；
+function judgeCharacter(trimValue) {
+    let beforeValue, afterValue;
+
+    // 如果输入框的值包含 '@'，
+    if(trimValue.indexOf('@') !== -1) {
+        let index = trimValue.indexOf('@');
+
+        beforeValue = trimValue.slice(0, index); // 截取 '@' 之前的字符，存储到 beforeValue
+
+        // 如果 '@' 后面有值,截取 '@' 后面的值
+        if(trimValue.slice(index + 1)) {
+            afterValue = trimValue.slice(index + 1);  // 截取 '@' 之后的字符，存储到 afterValue
+        }
+    }else{
+        beforeValue = trimValue
+    }
+    let valueArr = [beforeValue, afterValue]
+
+    return valueArr;
+}
+
+// 获取符合条件的后缀，拼接成新的字符串
+function getPostfix(valueArr) {
+    let newPostfixList = [];
+    // 如果输入框里 '@' 后面有值的话
+    if(valueArr[1]) {
+        for(let i = 0;i < postfixList.length;i++) {
+            // 截取 postfixList[i] 中 从0开始到 valueArr[1] 长度的值，跟 valueArr[1] 做比较；如果相等，提出 postfixList[i]
+            if (postfixList[i].slice(0, valueArr[1].length) === valueArr[1]) {
+                newPostfixList.push(postfixList[i]);
+            }
+        }
+        return newPostfixList.length !== 0 ? newPostfixList : postfixList;
+    }else {
+        return postfixList;
+    }
+}
+
+// 新增元素，填值，添加到页面
+function addElement(newPostfixList, valueArr) {
+    let li = '';
+
+    console.log(index,'index');
+    console.log(newPostfixList,'newPostfixList');
+
+    if(newPostfixList.length === 1) index = 0;
+
+    for(let i = 0;i < newPostfixList.length;i++) {
+//        console.log(i,'i');
+        console.log(index,'index');
+
+        if(index === i) {
+            li += '<li class="active">' + valueArr[0] + '@' + newPostfixList[i] + '</li>';
+        }else {
+            li += '<li>' + valueArr[0] + '@' + newPostfixList[i] + '</li>';
+        }
+    }
+    emailSugWrapper.innerHTML = li;
+}
+
+
+// 监听输入框事件   当用户输入字符后，显示提示框，并且把用户输入的内容自动拼上邮箱后缀进行显示
+emailInput.addEventListener('input', function () {
+    if(judgeHasValue(emailInput.value)) {
+        let trimValue = trim(emailInput.value); // 获取输入框的值，并去掉两端空格；
+
+        valueArr = judgeCharacter(trimValue); // 获取 '@'之前，之后的值
+
+        newPostfixList = getPostfix(valueArr); // 获取新符合条件的后缀数组
+
+        addElement(newPostfixList, valueArr); // 新增元素，填值，添加到页面
+    }
+})
+
+// 给焦点
+function addFocus(some) {
+    some.focus();
+}
+addFocus(emailInput);
+
+// 监听 提示框 的点击事件
 emailSugWrapper.addEventListener('click', function(e) {
     let event = e || window.event;
     let target = event.target || event.srcElement;
     if(target.tagName.toLowerCase() === 'li') {
-        emailInput.value = target.innerHTML; // 把点击的 li 内容赋给输入框
-        emailInput.focus(); // 焦点在输入框
+        target.className = 'active'; // 选中的 li 添加 active
 
-        emailSugWrapper.style.display = 'none'; // 隐藏提示框
-        emailSugWrapper.innerHTML = ''; // 提示框内容至为空
+        emailInput.value = target.innerHTML; // 选中的值赋给输入框
+        emailSugWrapper.style.display = 'none';
+
+        addFocus(emailInput);
     }
 })
 
-window.onload = function() {
-    emailInput.focus(); // 焦点在输入框
-}
+// 监听键盘事件
+document.addEventListener('keydown', function(e) {
+    let event = e.event || window.event;
+
+    let len = emailSugWrapper.children.length;
+
+    // 如果按下的是 Enter 键
+    if(event.keyCode === 13) {
+
+        emailInput.value = emailSugWrapper.children[index].innerHTML;
+
+        emailSugWrapper.style.display = 'none';
+    }
+
+    // 如果按下的是 ↑ 键
+    else if(event.keyCode === 38) {
+        if(len === 1) {
+            index = 0;
+        }else {
+            if(index === 0) {
+                index = len - 1;
+            }else {
+                index--;
+            }
+        }
+    }
+    // 如果按下的是 ↓ 键
+    else if(event.keyCode === 40) {
+        if(len === 1) {
+            index = 0;
+        }else {
+            if (index === len - 1) {
+                index = 0;
+            } else {
+                index++;
+            }
+        }
+    }
+    // 如果按下的是 Esc 键 , 全选输入框的文本
+    else if(event.keyCode === 27) {
+        emailInput.select();
+    }
+
+    addElement(newPostfixList, valueArr);
+})
 </script>
+</body>
 </html>
