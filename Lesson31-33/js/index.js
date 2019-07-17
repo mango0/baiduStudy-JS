@@ -1,38 +1,75 @@
 let selectRegion = document.getElementById('selectRegion');
+let selectProduct = document.getElementById('selectProduct');
 let table = document.getElementById('table');
 let tbody = table.getElementsByTagName('tbody');
 
-let regionArr = [];
+let newArr = [];
+let selectRegionValue, selectProductValue;
 
+
+// 选择地区
 selectRegion.addEventListener('change', function() {
-    console.log(selectRegion.value);
+    let index = selectRegion.options.selectedIndex;
+    selectRegionValue = selectRegion.options[index].text;
 
-    let arr = setnewRegion(selectRegion.value);
+
+    let arr = setData(selectRegionValue, selectProductValue);
 
     setTable(arr);
 })
 
-// 重新设置符合所选地区条件的数据
-function setnewRegion(value) {
-    regionArr = [];
+// 选择商品种类
+selectProduct.addEventListener('change', function() {
+    let index = selectProduct.options.selectedIndex;
+    selectProductValue = selectProduct.options[index].text;
 
-    for(let i in sourceData) {
-        if(value === 'huadong' && sourceData[i].region === '华东') {
-            regionArr.push(sourceData[i]);
-        }else if(value === 'huanan' && sourceData[i].region === '华南') {
-            regionArr.push(sourceData[i]);
-        }else if(value === 'huabei' && sourceData[i].region === '华北') {
-            regionArr.push(sourceData[i]);
+    let arr = setData(selectRegionValue, selectProductValue);
+
+    setTable(arr);
+})
+
+
+
+// 重新设置符合所选条件的数据
+function setData(regionValue, productValue) {
+    newArr = [];
+
+    console.log(regionValue,'regionValue');
+    console.log(productValue,'productValue');
+
+    // 如果没有选择任何下拉，则显示全部数据
+    if(!regionValue && !productValue) {
+        newArr = sourceData;
+    }else {
+        for(let i in sourceData) {
+            if(regionValue && !productValue) {
+                if(sourceData[i].region === regionValue) {
+                    newArr.push(sourceData[i]);
+                }
+            }else if(!regionValue && productValue) {
+                if(sourceData[i].product === productValue) {
+                    newArr.push(sourceData[i]);
+                }
+            }else if(regionValue && productValue) {
+                if(sourceData[i].region === regionValue && sourceData[i].product === productValue) {
+                    newArr.push(sourceData[i]);
+                }
+            }
         }
     }
 
-    return regionArr;
+    return newArr;
 }
+
 
 // 往 table 里填值
 function setTable(arr) {
+
+    tbody[0].innerHTML = '';
+
     for(let i in arr) {
         let tr = document.createElement('tr');
+
 
         let td1 = tr.insertCell(0);
         td1.innerHTML = arr[i].product;
@@ -47,3 +84,54 @@ function setTable(arr) {
         tbody[0].appendChild(tr);
     }
 }
+
+setTable(sourceData);
+
+
+
+
+
+let allSelect = document.getElementById('allSelect');
+let checkboxWrapper = document.getElementsByClassName('checkbox-wrapper');
+let checkboxInput = checkboxWrapper[0].getElementsByTagName('input');
+
+// 点击全选时，如果单个选项中只要有一个不是被选上的状态，则进行全选操作
+allSelect.addEventListener('change', function() {
+    // console.log(allSelect.checked);
+
+    if(allSelect.checked) {
+        for(let i = 0;i < checkboxInput.length;i++) {
+            checkboxInput[i].checked = true;
+        }
+    }else {
+        for(let i = 0;i < checkboxInput.length;i++) {
+            // 点击全选时，如果单个选项中所有选项都已经是被选上的状态，则无反应
+            if(checkboxInput[i].checked) {
+                allSelect.checked = true;
+            }
+        }
+    }
+})
+
+// 事件委托，监听多选框
+checkboxWrapper[0].addEventListener('change', function(e) {
+    let event = window.event || e;
+    let target = event.target || event.srcElement;
+
+    let input = target.tagName.toLowerCase();
+    if(input === 'input') {
+        console.log(target.checked,'checked');
+
+        for(let i = 0;i < checkboxInput.length;i++) {
+
+            // 点击全选时，如果单个选项中所有选项都已经是被选上的状态，则无反应
+            if(checkboxInput[i].checked) {
+                allSelect.checked = true;
+            }
+            // 如果当前是全选状态，取消任何一个子选项，则全选CheckBox也要置为未勾选状态
+            else {
+                allSelect.checked = false;
+            }
+        }
+    }
+})
