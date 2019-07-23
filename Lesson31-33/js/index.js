@@ -1,3 +1,170 @@
+let areaWrap = document.getElementById('areaWrap');
+let kindWrap = document.getElementById('kindWrap');
+createCheckBox(areaWrap, [{
+    value: 1,
+    text: "华东",
+    code: 'huadong'
+}, {
+    value: 2,
+    text: "华南",
+    code: 'huanan'
+}, {
+    value: 3,
+    text: "华北",
+    code: 'huabei'
+}
+]);
+
+createCheckBox(kindWrap, [{
+    value: 1,
+    text: "手机",
+    code: 'phone'
+}, {
+    value: 2,
+    text: "笔记本",
+    code: 'mac'
+}, {
+    value: 3,
+    text: "智能音箱",
+    code: 'audio'
+}
+]);
+
+
+// 生成 checkbox
+function createCheckBox(boxWrap, arr) {
+    // 生成全选checkbox的html，给一个自定义属性表示为全选checkbox，比如checkbox-type="all"
+    let allCheckboxInput = document.createElement('input');
+    allCheckboxInput.setAttribute('type', 'checkbox');
+    allCheckboxInput.setAttribute('data-type', 'all');
+    // allCheckboxInput.setAttribute('id', 'all');
+
+    let allLabel = document.createElement('label');
+    allLabel.innerHTML = '全选';
+
+    boxWrap.appendChild(allCheckboxInput);
+    boxWrap.insertBefore(allLabel, allCheckboxInput);
+
+
+    /*遍历参数对象 {
+        生成各个子选项checkbox的html，给一个自定义属性表示为子选项
+    }*/
+    for(let i = 0;i < arr.length;i++) {
+        let checkboxInput = document.createElement('input');
+        checkboxInput.setAttribute('type', 'checkbox');
+        checkboxInput.setAttribute('id', arr[i].code);
+
+        let label = document.createElement('label');
+        label.setAttribute('for', arr[i].code);
+        label.innerHTML = arr[i].text;
+
+        boxWrap.appendChild(checkboxInput);
+        boxWrap.insertBefore(label, checkboxInput);
+    }
+
+
+    // 事件委托，监听多选框
+    boxWrap.addEventListener('change', function(e) {
+        let event = window.event || e;
+        let target = event.target || event.srcElement;
+
+        let children = boxWrap.getElementsByTagName('input');
+        let label = boxWrap.getElementsByTagName('label');
+
+        let selectArr = [];
+
+        let input = target.tagName.toLowerCase();
+        if(input === 'input') {
+
+            // 有这个自定义属性说明是全选框
+            if(target.dataset.type === 'all') {
+                // 如果选中全选框
+                if(target.checked) {
+                    // 选中所有的多选框
+                    for(let i = 0;i < children.length;i++) {
+                        children[i].checked = true;
+
+                        selectArr.push(label[i].innerHTML);
+                    }
+                }else {
+                    for(let i = 0;i < children.length;i++) {
+                        // 1。点击全选时，如果单个选项中所有选项都已经是被选上的状态，则无反应
+                        if(children[i].checked) {
+                            target.checked = true;
+                        }
+                    }
+                }
+            }else {
+                // 2。如果当前是全选状态，取消任何一个子选项，则全选CheckBox也要置为未勾选状态
+                if(!target.checked) {
+                    allCheckboxInput.checked = false;
+                }
+
+                let count = 0;
+                for(let i = 0;i < children.length;i++) {
+                    if(children[i].checked) {
+                        count++;
+
+                        selectArr.push(label[i].innerHTML);
+                    }
+
+                    // 3。点击最后一个未被选中的单个选项后，全选CheckBox也要置为被勾选状态
+                    if(count === children.length) {
+                        allCheckboxInput.checked = true;
+                    }
+                }
+                // 4。不允许一个都不勾选，所以当用户想取消唯一一个被勾选的子选项时，无交互反应，不允许取消勾选
+                if(count === 0) {
+                    target.checked = true;
+                }
+            }
+
+            console.log(selectArr,'selectArr');
+            let arr = setDataAgain(selectArr);
+
+            console.log(arr,'arr');
+
+            setTable(arr);
+        }
+    })
+}
+
+// 重新设置符合所选条件的数据
+function setDataAgain(selectArr) {
+    newArr = [];
+
+    // 如果没有选择任何下拉，则显示全部数据
+    if(selectArr.length === 0) {
+        newArr = sourceData;
+    }else {
+        for(let i in sourceData) {
+            for(let j in selectArr) {
+                if(sourceData[i].region === selectArr[j]) {
+                    newArr.push(sourceData[i]);
+                }else if(sourceData[i].product === selectArr[j]) {
+                    newArr.push(sourceData[i]);
+                }
+            }
+           /* if(regionValue && !productValue) {
+                if(sourceData[i].region === regionValue) {
+                    newArr.push(sourceData[i]);
+                }
+            }else if(!regionValue && productValue) {
+                if(sourceData[i].product === productValue) {
+                    newArr.push(sourceData[i]);
+                }
+            }else if(regionValue && productValue) {
+                if(sourceData[i].region === regionValue && sourceData[i].product === productValue) {
+                    newArr.push(sourceData[i]);
+                }
+            }*/
+        }
+    }
+
+    return newArr;
+}
+
+
 let selectRegion = document.getElementById('selectRegion');
 let selectProduct = document.getElementById('selectProduct');
 let table = document.getElementById('table');
@@ -11,7 +178,6 @@ let selectRegionValue, selectProductValue;
 selectRegion.addEventListener('change', function() {
     let index = selectRegion.options.selectedIndex;
     selectRegionValue = selectRegion.options[index].text;
-
 
     let arr = setData(selectRegionValue, selectProductValue);
 
@@ -34,8 +200,8 @@ selectProduct.addEventListener('change', function() {
 function setData(regionValue, productValue) {
     newArr = [];
 
-    console.log(regionValue,'regionValue');
-    console.log(productValue,'productValue');
+    /*console.log(regionValue,'regionValue');
+    console.log(productValue,'productValue');*/
 
     // 如果没有选择任何下拉，则显示全部数据
     if(!regionValue && !productValue) {
@@ -61,15 +227,12 @@ function setData(regionValue, productValue) {
     return newArr;
 }
 
-
 // 往 table 里填值
 function setTable(arr) {
-
     tbody[0].innerHTML = '';
 
     for(let i in arr) {
         let tr = document.createElement('tr');
-
 
         let td1 = tr.insertCell(0);
         td1.innerHTML = arr[i].product;
@@ -84,80 +247,4 @@ function setTable(arr) {
         tbody[0].appendChild(tr);
     }
 }
-
 setTable(sourceData);
-
-
-
-
-
-let allSelect = document.getElementById('allSelect');
-let checkboxWrapper = document.getElementsByClassName('checkbox-wrapper');
-let checkboxInput = checkboxWrapper[0].getElementsByTagName('input');
-
-// 点击全选时，如果单个选项中只要有一个不是被选上的状态，则进行全选操作
-/*allSelect.addEventListener('change', function() {
-    // console.log(allSelect.checked);
-
-    if(allSelect.checked) {
-        for(let i = 0;i < checkboxInput.length;i++) {
-            checkboxInput[i].checked = true;
-        }
-    }else {
-        for(let i = 0;i < checkboxInput.length;i++) {
-            // 点击全选时，如果单个选项中所有选项都已经是被选上的状态，则无反应
-            if(checkboxInput[i].checked) {
-                allSelect.checked = true;
-            }
-        }
-    }
-})*/
-
-// 事件委托，监听多选框
-checkboxWrapper[0].addEventListener('change', function(e) {
-    let event = window.event || e;
-    let target = event.target || event.srcElement;
-
-    let input = target.tagName.toLowerCase();
-    if(input === 'input') {
-
-        // 有这个自定义属性说明是全选框
-        if(target.dataset.type === 'all') {
-            // 如果选中全选框
-            if(target.checked) {
-                // 选中所有的多选框
-                for(let i = 0;i < checkboxInput.length;i++) {
-                    checkboxInput[i].checked = true;
-                }
-            }else {
-                for(let i = 0;i < checkboxInput.length;i++) {
-                    // 1。点击全选时，如果单个选项中所有选项都已经是被选上的状态，则无反应
-                    if(checkboxInput[i].checked) {
-                        target.checked = true;
-                    }
-                }
-            }
-        }else {
-            // 2。如果当前是全选状态，取消任何一个子选项，则全选CheckBox也要置为未勾选状态
-            if(!target.checked) {
-                allSelect.checked = false;
-            }
-
-            let count = 0;
-            for(let i = 0;i < checkboxInput.length;i++) {
-                if(checkboxInput[i].checked) {
-                    count++;
-                }
-
-                // 3。点击最后一个未被选中的单个选项后，全选CheckBox也要置为被勾选状态
-                if(count === checkboxInput.length) {
-                    allSelect.checked = true;
-                }
-            }
-            // 4。不允许一个都不勾选，所以当用户想取消唯一一个被勾选的子选项时，无交互反应，不允许取消勾选
-            if(count === 0) {
-                target.checked = true;
-            }
-        }
-    }
-})
