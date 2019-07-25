@@ -135,7 +135,7 @@ areaWrap.addEventListener('change', function(e) {
             }
         }
 
-        // console.log(selectAreaArr,'selectAreaArr');
+        console.log(selectAreaArr,'selectAreaArr');
         let arr = setDataAgain(selectAreaArr, selectKindArr);
 
         // console.log(arr,'arr');
@@ -214,7 +214,7 @@ kindWrap.addEventListener('change', function(e) {
             }
         }
 
-        // console.log(selectKindArr,'selectKindArr');
+        console.log(selectKindArr,'selectKindArr');
         let arr = setDataAgain(selectAreaArr, selectKindArr);
 
         // console.log(arr,'arr');
@@ -342,6 +342,7 @@ function setDataAgain(selectRegionValue, selectProductValue) {
 let selectRegion = document.getElementById('selectRegion');
 let selectProduct = document.getElementById('selectProduct');
 let table = document.getElementById('table');
+let th = table.getElementsByTagName('th');
 let tbody = table.getElementsByTagName('tbody');
 
 let newArr = [];
@@ -402,6 +403,17 @@ function setData(regionValue, productValue) {
     return newArr;
 }
 
+/**
+* 创建 td
+* @param index: 新增td添入的位置
+* @param parent： td被插入到哪个父元素里面
+* @param text： td的内容
+ */
+function createTd(index, parent, text) {
+    let td = parent.insertCell(index);
+    td.innerHTML = text;
+}
+
 // 往 table 里填值
 function setTable(arr) {
 
@@ -409,18 +421,73 @@ function setTable(arr) {
 
     for(let i in arr) {
         let tr = document.createElement('tr');
+        let td1, td2, td3;
 
-        let td1 = tr.insertCell(0);
-        td1.innerHTML = arr[i].product;
+        // createTd(0, tr, arr[i].product);
 
-        let td2 = tr.insertCell(1);
-        td2.innerHTML = arr[i].region;
-        td1.setAttribute('rowspan', arr[i].productRowspan);
+        // 如果只选择一个地区，选择多个商品，则地区在第一列，商品在第二列
+        if(selectAreaArr.length === 1 && selectKindArr.length >= 1) {
+            th[0].innerHTML = '地区';
+            th[1].innerHTML = '商品';
 
-        for(let j = 0;j < arr[i].sale.length;j++) {
-            let td3 = tr.insertCell(j + 2);
-            td3.innerHTML = arr[i].sale[j];
+            td1 = tr.insertCell(0);
+            td1.innerHTML = arr[i].region;
+
+            td1.setAttribute('rowspan', arr[i].regionRowspan);
+
+            // 如果td2的 rowspan === 0，就删掉这个td
+            if(td1.getAttribute('rowspan') === '0') {
+
+                tr.removeChild(td1);
+
+                td2 = tr.insertCell(0);
+                td2.innerHTML = arr[i].product;
+
+                for(let j = 0;j < arr[i].sale.length;j++) {
+                    td3 = tr.insertCell(j + 1);
+                    td3.innerHTML = arr[i].sale[j];
+                }
+            }else {
+                td2 = tr.insertCell(1);
+                td2.innerHTML = arr[i].product;
+
+                for(let j = 0;j < arr[i].sale.length;j++) {
+                    td3 = tr.insertCell(j + 2);
+                    td3.innerHTML = arr[i].sale[j];
+                }
+            }
         }
+        // 如果只选择一个商品，选择多个地区 ，则商品在第一列，地区在第二列
+        else {
+            td1 = tr.insertCell(0);
+            td1.innerHTML = arr[i].product;
+
+            td1.setAttribute('rowspan', arr[i].productRowspan);
+
+            // 如果td1的 rowspan === 0，就删掉这个td
+            if(td1.getAttribute('rowspan') === '0') {
+
+                tr.removeChild(td1);
+
+                td2 = tr.insertCell(0);
+                td2.innerHTML = arr[i].region;
+
+                for(let j = 0;j < arr[i].sale.length;j++) {
+                    td3 = tr.insertCell(j + 1);
+                    td3.innerHTML = arr[i].sale[j];
+                }
+            }else {
+                td2 = tr.insertCell(1);
+                td2.innerHTML = arr[i].region;
+
+                for(let j = 0;j < arr[i].sale.length;j++) {
+                    td3 = tr.insertCell(j + 2);
+                    td3.innerHTML = arr[i].sale[j];
+                }
+            }
+        }
+
+
         tbody[0].appendChild(tr);
     }
 }
