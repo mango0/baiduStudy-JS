@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <style>
+    </style>
+</head>
+<body>
+<div>
+    <canvas id="canvasWrap" width="1000px" height="1000px"></canvas>
+</div>
+
+
+<script>
+    let canvasWrap = document.getElementById('canvasWrap');
+    if(canvasWrap.getContext) {
+        let ctx = canvasWrap.getContext('2d');
+
+        ctx.font = '20px Arial';
+
+        ctx.fillText('画一条线', 20, 20);
+
+
+
+    }
+
+</script>
+<!--<script>
+    let canvasWrap = document.getElementById('canvasWrap');
+    if(canvasWrap.getContext) {
+        let ctx = canvasWrap.getContext('2d');
+        ctx.fillStyle = 'pink';
+        ctx.fillRect(200, 200, 300, 200);
+        ctx.clearRect(220, 220, 250, 150);
+        ctx.strokeRect(240, 240, 150, 80);
+
+        ctx.moveTo(400, 400);
+        ctx.lineTo(450, 600);
+        ctx.lineTo(550, 650);
+        ctx.fill();
+
+        ctx.moveTo(10, 400);
+        ctx.lineTo(50, 500);
+        ctx.lineTo(300, 550);
+        ctx.stroke();
+
+        for(let i = 0;i < 4;i++) {
+            for(let j = 0;j < 3;j++) {
+                ctx.beginPath();
+                let x = 525 + j *50; // x 坐标值
+                let y = 125 + i * 50; // y 坐标值
+                let radius = 20; // 圆弧半径
+                let startAngle = 0; // 开始点
+                let endAngle = Math.PI + (Math.PI * j) / 2; // 结束点
+                let anticlockwise = i % 2 === 0 ? false : true;
+
+                ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+
+                if(i > 1) {
+                    ctx.fill();
+                }else {
+                    ctx.stroke();
+                }
+            }
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(75, 25);
+        ctx.quadraticCurveTo(25, 25, 25, 62.5);
+        ctx.quadraticCurveTo(25, 100, 50, 100);
+        ctx.quadraticCurveTo(50, 120, 30, 125);
+        ctx.quadraticCurveTo(60, 120, 65, 100);
+        ctx.quadraticCurveTo(125, 100, 125, 62.5);
+        ctx.quadraticCurveTo(125, 25, 75, 25);
+        ctx.stroke();
+
+    }
+</script>-->
+</body>
+</html>
