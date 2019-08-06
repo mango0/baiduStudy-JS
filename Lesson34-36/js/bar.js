@@ -23,7 +23,7 @@ function drawBar(data) {
             maxValue = Math.max(...data);
         }
     }
-    console.log(maxValue,'maxValue');
+    // console.log(maxValue,'maxValue');
 
     // 根据Max和你用来绘制柱状图图像区域的高度，进行一个数据和像素的折算比例
     //

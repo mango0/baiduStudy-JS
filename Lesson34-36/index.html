@@ -7,18 +7,27 @@
 <body>
 <h2>柱状图</h2>
 <div id="barWrap"></div>
-<svg id="bar-graph" width="100%" height="100%" version="1.1"
-     xmlns="http://www.w3.org/2000/svg">
-</svg>
+
+
+<div>
+    <canvas id="canvasWrap" width="1000px" height="500px"></canvas>
+</div>
+
+
 
 <!--<script src="js/data.js"></script>-->
 <!--<script src="js/demo.js"></script>-->
 <script src="js/bar.js"></script>
+<script src="js/line.js"></script>
 
 <script>
     let data = [120, 100, 140, 160, 180, 185, 190, 210, 230, 245, 255, 270];
     let barWrap = document.getElementById('barWrap');
     barWrap.innerHTML = drawBar(data);
+
+
+    let canvasWrap = document.getElementById('canvasWrap');
+    drawLine(canvasWrap, data);
 </script>
 </body>
 </html>

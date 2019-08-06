@@ -13,19 +13,50 @@
 
 
 <script>
-    let canvasWrap = document.getElementById('canvasWrap');
-    if(canvasWrap.getContext) {
-        let ctx = canvasWrap.getContext('2d');
+let canvasWrap = document.getElementById('canvasWrap');
+if(canvasWrap.getContext) {
+    let ctx = canvasWrap.getContext('2d');
 
-        ctx.font = '20px Arial';
+    ctx.font = '20px Arial';
 
-        ctx.fillText('画一条线', 20, 20);
+    ctx.fillText('画一条线', 20, 20);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0,40);
+    ctx.stroke();
 
+    ctx.fillText('画一个矩形', 20, 70);
+    ctx.rect(20, 85, 100, 40);
+    ctx.stroke();
 
+    ctx.fillText('画一个圆形', 20, 180);
+    ctx.beginPath();
+    ctx.arc(40, 220, 20, 0, 2 * Math.PI);
+    ctx.stroke();
 
-    }
+    ctx.fillText('显示一些文字', 20, 280);
+
+    ctx.fillText('画一个时钟', 20, 320);
+    ctx.beginPath();
+    ctx.arc(70, 400, 50, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    ctx.fillText('画一朵云', 20, 480);
+    ctx.beginPath();
+    ctx.moveTo(20, 620);
+    ctx.quadraticCurveTo(40, 550, 100, 560);
+    ctx.moveTo(100, 560);
+    ctx.bezierCurveTo(100, 500, 300, 500, 300, 560);
+    ctx.moveTo(300, 560);
+    ctx.quadraticCurveTo(400, 560, 400, 620);
+    ctx.moveTo(400, 620);
+    ctx.lineTo(20, 620);
+    ctx.stroke();
+
+}
 
 </script>
+
 <!--<script>
     let canvasWrap = document.getElementById('canvasWrap');
     if(canvasWrap.getContext) {
