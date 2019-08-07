@@ -47,20 +47,21 @@ function drawLine(wrap, data) {
             ctx.strokeStyle = lineColor;
             // ctx.closePath();
 
-            console.log(xSpacing * (i + 1),'xSpacing');
-            console.log(ySpacing * (i + 1),'ySpacing');
+            console.log('xSpacing', xSpacing * (i + 1),'xSpacing');
+            console.log(ySpacing * data[i],'ySpacing');
 
 
             // if 不是第一个点 {
-           /* if(i !== 0) {
+            // let num = 0;
+            if(i !== 0) {
                 // 绘制这个数据点和上一个数据点的连线
 
-
-                ctx.lineTo(xSpacing * (i + 1), ySpacing * data[i]);
-                i++;
+                ctx.moveTo(xSpacing * (i + 1), axisHeight - ySpacing * data[i]);
+                ctx.lineTo(xSpacing * (i + 2), axisHeight - ySpacing * data[i + 1]);
+                // num++;
                 ctx.stroke();
                 ctx.strokeStyle = lineColor;
-            }*/
+            }
             // 记录下当前数据点的数据用于下一个点时绘制连线
         }
     }
